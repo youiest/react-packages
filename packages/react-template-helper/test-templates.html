@@ -1,0 +1,30 @@
+<template name="ReactTemplateInDiv">
+  <div>
+    {{> React}}
+  </div>
+</template>
+
+<template name="UsesTextReactComponent">
+  <span>
+    {{> React component=textComponent text=text}}
+  </span>
+</template>
+
+<template name="UsesClickableReactComponent">
+  <span>
+    {{> React component=clickableComponent onClick=onClick}}
+  </span>
+</template>
+
+<template name="UsesGenericComponent">
+  <span>
+    {{> React component=component}}
+  </span>
+</template>
+
+<template name="UsesUnmountableComponent">
+  <span>
+    {{> React component=unmountableComponent onUnmounted=onUnmounted}}
+  </span>
+</template>
+
