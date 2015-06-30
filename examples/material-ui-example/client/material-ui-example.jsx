@@ -1,52 +1,65 @@
-var ThemeManager = new mui.Styles.ThemeManager();
+let RaisedButton = mui.RaisedButton;
+let Dialog = mui.Dialog
+let ThemeManager = new mui.Styles.ThemeManager();
+let Colors = mui.Styles.Colors;
 
-var {
-  AppBar,
-  DatePicker,
-  TextField
-} = mui;
+let Main = React.createClass({
 
-React.initializeTouchEvents(true)
-
-var App = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
 
-  getChildContext: function() {
+  getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
 
-  render: function() {
+  componentWillMount() {
+    ThemeManager.setPalette({
+      accent1Color: Colors.deepOrange500
+    });
+  },
+
+  render() {
+
+    let containerStyle = {
+      textAlign: 'center',
+      paddingTop: '200px'
+    };
+
+    let standardActions = [
+      { text: 'Okay' }
+    ];
+
     return (
-      <div>
-        <DatePicker hintText="Landscape Dialog" mode="landscape"/>
-        <TextField hintText="Hint Text" />
+      <div style={containerStyle}>
+        <Dialog
+          title="Super Secret Password"
+          actions={standardActions}
+          ref="superSecretPasswordDialog">
+          1-2-3-4-5
+        </Dialog>
+        
+        <h1>material-ui</h1>
+        <h2>example project</h2>
+
+        <RaisedButton label="Super Secret Password" primary={true} onTouchTap={this._handleTouchTap} />
+
       </div>
     );
+  },
+
+  _handleTouchTap() {
+    this.refs.superSecretPasswordDialog.show();
   }
+
 });
 
 if (Meteor.isClient) {
   Meteor.startup(function () {
-    var WebFontConfig = {
-      google: { families: [ 'Roboto:400,300,500:latin' ] }
-    };
-    (function() {
-      var wf = document.createElement('script');
-      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-      wf.type = 'text/javascript';
-      wf.async = 'true';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(wf, s);
-    })();
-
     injectTapEventPlugin();
 
-    $(document.body).html("<div id='container'></div>");
-    React.render(<App />, document.getElementById("container"));
+    React.render(<Main />, document.getElementById("container"));
   });
 }
