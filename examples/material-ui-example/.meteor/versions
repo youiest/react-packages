@@ -48,6 +48,7 @@ spacebars-compiler@1.0.6
 templating@1.1.1
 tracker@1.0.7
 ui@1.0.6
+ukabu:material-ui@0.8.0-beta
 underscore@1.0.3
 url@1.0.4
 webapp@1.2.0
